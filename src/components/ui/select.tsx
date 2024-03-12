@@ -21,18 +21,17 @@ const SelectTrigger = React.forwardRef<
   const statusStyle =
     "flex items-center justify-between border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground outline-none";
 
+  const computedClassName = cn(
+    className === "noRoundedStyle"
+      ? noRoundedStyle
+      : className === "statusStyle"
+      ? statusStyle
+      : defaultStyle,
+    className
+  );
+
   return (
-    <SelectPrimitive.Trigger
-      ref={ref}
-      className={cn(
-        className === "noRoundedStyle"
-          ? noRoundedStyle
-          : className === "statusStyle"
-          ? statusStyle
-          : defaultStyle
-      )}
-      {...props}
-    >
+    <SelectPrimitive.Trigger ref={ref} className={computedClassName} {...props}>
       {children}
       <SelectPrimitive.Icon asChild>
         <ChevronDown className="h-4 w-4 opacity-50" />

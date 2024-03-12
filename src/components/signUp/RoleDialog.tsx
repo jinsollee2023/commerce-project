@@ -18,26 +18,26 @@ import {
   SelectItem,
 } from "../ui/select";
 import useUserMutations from "@/hooks/queries/user/useUserMutations";
-import { IGoogleUser } from "@/types/types";
 import { getKoreaTimeDate } from "@/shared/common";
+import { User } from "firebase/auth";
 
 interface RoleDialogProps {
   open: boolean;
   setOpen: (open: boolean) => void;
-  googleUserData: IGoogleUser;
+  googleUserData: User;
 }
 const RoleDialog = ({ open, setOpen, googleUserData }: RoleDialogProps) => {
   const [selectedValue, setSelectedValue] = useState("");
   const { addUserMutation } = useUserMutations();
 
   const saveUserInfoButtonHandler = () => {
-    const { id, name, email } = googleUserData;
+    const { uid, displayName, email } = googleUserData;
     const isSeller = selectedValue === "seller" ? true : false;
     const date = getKoreaTimeDate();
     const newUser = {
-      id: id,
-      nickname: name,
-      email,
+      id: uid,
+      nickname: displayName as string,
+      email: email as string,
       password: "",
       isSeller,
       createdAt: date,

@@ -3,13 +3,14 @@ import SearchInput from "@/components/products/search/SearchInput";
 import RoleDialog from "@/components/signUp/RoleDialog";
 import { userAPI } from "@/lib/api/userAPI";
 import { useUser } from "@/store/UserContext";
-import { IGoogleUser } from "@/types/types";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { GoogleAuthProvider, User, signInWithCredential } from "firebase/auth";
+import { auth } from "@/firebase";
 
 const Home = () => {
   const [open, setOpen] = useState(false);
-  const [googleUser, setGoogleUser] = useState<IGoogleUser>();
+  const [googleUser, setGoogleUser] = useState<User>();
   const { setUser, setIsSeller } = useUser();
   const navigate = useNavigate();
 
@@ -18,12 +19,11 @@ const Home = () => {
     const accessToken = parsedHash.get("access_token");
     const getUserData = async () => {
       try {
-        const googleUserData = await userAPI.getUserFromGoogle(
-          accessToken as string
-        );
-        setGoogleUser(googleUserData);
+        const credential = GoogleAuthProvider.credential(null, accessToken);
+        const { user } = await signInWithCredential(auth, credential!);
+        setGoogleUser(user);
         const userDataFromDatabase = await userAPI.getUserFromDatabase(
-          googleUserData.id
+          user.uid
         );
         if (!userDataFromDatabase) {
           setOpen(true);
@@ -50,7 +50,7 @@ const Home = () => {
       <RoleDialog
         open={open}
         setOpen={setOpen}
-        googleUserData={googleUser as IGoogleUser}
+        googleUserData={googleUser as User}
       />
       <SearchInput />
       <FourProductsByCategory />
