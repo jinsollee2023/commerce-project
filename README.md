@@ -1,5 +1,5 @@
 # React,TS 개인 프로젝트
-[Website](https://commerce-week-3.vercel.app/)
+- [Website](https://commerce-week-3.vercel.app/)
 
 
 ## ⏰ 개발 기간
