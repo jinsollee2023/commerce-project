@@ -43,8 +43,7 @@ const GoogleLogin = ({
   const [isSdkLoaded, setIsSdkLoaded] = useState(false);
   const [instance, setInstance] = useState<any>(null!);
 
-  // const redirect_uri = "https://commerce-week-3.vercel.app";
-  const redirect_uri = "http://localhost:5173/";
+  const redirect_uri = "https://commerce-project-js.vercel.app";
 
   useEffect(() => {
     !isSdkLoaded && load();

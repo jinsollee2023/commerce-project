@@ -31,9 +31,10 @@ const MainCategorySection = ({
       </div>
       <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
         {products.pages.map((group, idx) => {
-          const mainProduct = group.sortedProductsArray.slice(0, 4);
+          const mainProduct = group?.sortedProductsArray?.slice(0, 4);
           return (
-            idx === 0 && (
+            idx === 0 &&
+            mainProduct && (
               <React.Fragment key={idx}>
                 {mainProduct.length > 0 ? (
                   mainProduct.map((product) => (
