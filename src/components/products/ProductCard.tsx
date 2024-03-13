@@ -53,7 +53,6 @@ const ProductCard = ({ product, viewType }: ProductCardProps) => {
   ) => {
     event.stopPropagation();
     if (userId === product.sellerId) {
-      prefetchProductData(product.id);
       navigate(`/product-registration?productId=${product.id}`);
     } else {
       toast({
@@ -80,7 +79,6 @@ const ProductCard = ({ product, viewType }: ProductCardProps) => {
 
   const handleCardClick = (event: React.MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
-    prefetchProductData(product.id);
     navigate(`/${productCategory}/${productId}`);
   };
 
@@ -92,6 +90,7 @@ const ProductCard = ({ product, viewType }: ProductCardProps) => {
         <Card
           key={productId}
           onClick={handleCardClick}
+          onMouseEnter={() => prefetchProductData(product.id)}
           className={`w-full h-[360px] ${
             !managementMode && "group"
           } cursor-pointer relative flex flex-col`}
@@ -118,6 +117,7 @@ const ProductCard = ({ product, viewType }: ProductCardProps) => {
               >
                 <button
                   onClick={(event) => goToProductUpdate(event)}
+                  onMouseEnter={() => prefetchProductData(product.id)}
                   data-cy="product-update-button"
                 >
                   <RiPencilFill className="cursor-pointer" />
