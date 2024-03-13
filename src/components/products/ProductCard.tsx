@@ -142,7 +142,7 @@ const ProductCard = ({ product, viewType }: ProductCardProps) => {
                   onLoad={() => setImageIsLoading(false)}
                   className={`${
                     imageIsLoading ? "hidden" : "none"
-                  } mb-2 object-cover`}
+                  } w-48 h-48 mb-2 object-cover`}
                 />
               </div>
             </div>

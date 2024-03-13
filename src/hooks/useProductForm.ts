@@ -34,8 +34,8 @@ const useProductForm = ({ userId, updateProduct }: useProductFormProps) => {
   });
 
   useEffect(() => {
-    setIsLoadingDataSet(true);
     const setFormValues = async () => {
+      setIsLoadingDataSet(true);
       if (updateProduct && Array.isArray(updateProduct.productImage)) {
         const imageURLs = updateProduct.productImage;
         setShowImages(imageURLs as string[]);
@@ -73,7 +73,7 @@ const useProductForm = ({ userId, updateProduct }: useProductFormProps) => {
       }
     };
     updateProduct && setFormValues();
-  }, [updateProduct]);
+  }, []);
 
   const onSubmitAddProduct = async (
     values: z.infer<typeof productFormSchema>

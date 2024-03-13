@@ -59,14 +59,15 @@ const ProductForm = () => {
     updateProduct: singleProductData,
   });
 
-  const spinners = [
-    { text: "포스트 불러오는 중", isLoading: isLoadingDataSet },
+  console.log(isLoadingDataSet);
 
-    { text: "이미지 변환 중..", isLoading: isResizingImage },
+  const spinners = [
     {
       text: singleProductData ? "포스트 수정 중.." : "포스트 등록 중..",
       isLoading: isLoading,
     },
+    { text: "포스트 불러오는 중", isLoading: isLoadingDataSet },
+    { text: "이미지 변환 중..", isLoading: isResizingImage },
   ];
 
   if (isLoadingSingleProductData) {
